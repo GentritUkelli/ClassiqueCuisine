@@ -1,0 +1,34 @@
+{
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Savor Delights",
+      "menus": [
+        {
+          "id": 1,
+          "name": "Chef's Specials",
+          "menu_items": [
+            {
+              "id": 1,
+              "name": "Signature Steak",
+              "description": "Prime steak seasoned and grilled to perfection",
+              "price": 29.99
+            },
+            {
+              "id": 2,
+              "name": "Seafood Platter",
+              "description": "A selection of fresh seafood including shrimp, scallops, and mussels",
+              "price": 26.99
+            },
+            {
+              "id": 3,
+              "name": "Vegetarian Delight",
+              "description": "A medley of roasted vegetables served with quinoa",
+              "price": 18.99
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
