@@ -3,7 +3,7 @@ const jsonServer = require("json-server");
 const jsonServerPort = 8080;
 
 //start json server
-const server = jsonServer.create.create();//create server
+const server = jsonServer.create();//create server
 const middlewares = jsonServer.defaults();// takes default middlewares from json
 server.use(jsonServer.bodyParser);// server ready bodyParser
 server.use(middlewares);//takes all middlewares json server has  
