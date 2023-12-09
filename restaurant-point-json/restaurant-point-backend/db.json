@@ -30,5 +30,10 @@
         }
       ]
     }
-  ]
+  ],
+  "lastUsedId": {
+    "restaurantId": 2,
+    "menusId": 2,
+    "menuItemsId": 4
+  }
 }
