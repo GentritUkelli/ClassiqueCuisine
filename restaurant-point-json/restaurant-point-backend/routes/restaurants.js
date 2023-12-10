@@ -71,9 +71,9 @@ module.exports = function (server) {
   server.get("/api/restaurants/id/:id", (request, response) => {
     const restaurantId = parseInt(request.params.id);
     const restaurantsData = router.db.get("restaurants").value();
-    const restaurant = restaurantsData.find((dept) => dept.id === restaurantId);
+    const restaurant = restaurantsData.find((rest) => rest.id === restaurantId);
 
-    if (!department) {
+    if (!restaurant) {
       response.status(404).json({ error: "Restaurant not found" });
     } else {
       response.json(restaurant);
