@@ -5,7 +5,7 @@ const router = jsonServer.router("db.json");
 function readLastUsedRestaurantsId() {
     try {
         const data = router.db.get("lastUsedId").value();
-        return data.restaurantsId;
+        return data.restaurantId;
     } catch (error) {
         return 1;
     }
@@ -13,7 +13,7 @@ function readLastUsedRestaurantsId() {
 
 function writeLastUsedRestaurantsId(value) {
     const lastUsedId = router.db.get("lastUsedId").value();
-    lastUsedId.RestaurantsId = value;
+    lastUsedId.restaurantId = value; // Corrected case here
     router.db.set("lastUsedId", lastUsedId).write();
 }
 

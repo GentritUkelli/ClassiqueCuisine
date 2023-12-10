@@ -29,10 +29,14 @@
           ]
         }
       ]
+    },
+    {
+      "id": 2,
+      "menu": []
     }
   ],
   "lastUsedId": {
-    "restaurantId": 2,
+    "restaurantId": 3,
     "menusId": 2,
     "menuItemsId": 4
   }
