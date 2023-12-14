@@ -5,7 +5,7 @@ module.exports = function (server) {
   const router = jsonServer.router("db.json");
   let restaurantIdCounter = readLastUsedMenusID();
 
-  server.post("/api/restaurants/:id", (request, response) => {
+  server.post("/api/menus/:id", (request, response) => {
     const restaurantId = parseInt(request.params.id);
     const requestBody = request.body;
     const restaurantsData = router.db.get("restaurants").value();
