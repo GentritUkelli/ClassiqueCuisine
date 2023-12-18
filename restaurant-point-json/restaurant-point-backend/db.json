@@ -30,6 +30,7 @@
         },
         {
           "id": 2,
+          "name":"Pite me djath",
           "menu_items": []
         },
         {
@@ -47,6 +48,14 @@
         {
           "id": 7,
           "menu_items": []
+        },
+        {
+          "id": 8,
+          "menu_items": []
+        },
+        {
+          "id": 9,
+          "menu_items": []
         }
       ]
     },
@@ -57,7 +66,7 @@
   ],
   "lastUsedId": {
     "restaurantId": 3,
-    "menuId": 8,
+    "menuId": 10,
     "menuItemsId": 4
   }
 }
