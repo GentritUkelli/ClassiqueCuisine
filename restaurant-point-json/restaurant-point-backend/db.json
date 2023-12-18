@@ -27,6 +27,26 @@
               "price": 18.99
             }
           ]
+        },
+        {
+          "id": 2,
+          "menu_items": []
+        },
+        {
+          "id": 3,
+          "menu_items": []
+        },
+        {
+          "id": 4,
+          "menu_items": []
+        },
+        {
+          "id": 5,
+          "menu_items": []
+        },
+        {
+          "id": 7,
+          "menu_items": []
         }
       ]
     },
@@ -37,7 +57,7 @@
   ],
   "lastUsedId": {
     "restaurantId": 3,
-    "menusId": 2,
+    "menuId": 8,
     "menuItemsId": 4
   }
 }

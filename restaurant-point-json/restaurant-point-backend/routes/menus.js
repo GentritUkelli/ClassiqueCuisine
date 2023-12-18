@@ -1,9 +1,9 @@
 const { request, response } = require("express");
 module.exports = function (server) {
-  const { readLastUsedMenusID } = require("../utils");
+  const { readLastUsedMenusId } = require("../utils");
   const jsonServer = require("json-server");
   const router = jsonServer.router("db.json");
-  let restaurantIdCounter = readLastUsedMenusID();
+  let menuIdCounter = readLastUsedMenusId();
 
   server.post("/api/menus/:id", (request, response) => {
     const restaurantId = parseInt(request.params.id);
@@ -20,7 +20,7 @@ module.exports = function (server) {
 
       if (requestBody.id === undefined) {
         let menuId;
-        menuId = restaurantIdCounter++;
+        menuId = menuIdCounter++;
         const newMenu = {
           id: menuId,
           name: requestBody.name,
@@ -30,7 +30,7 @@ module.exports = function (server) {
         restaurant.menus = menuList;
         router.db.set("restaurants", restaurantsData).write();
         const lastUsedId = router.db.get("lastUsedId").value();
-        lastUsedId.restaurantId = restaurantIdCounter;
+        lastUsedId.menuId = menuIdCounter;
         router.db.set("lastUsedId", lastUsedId).write();
         response.json(restaurantsData[index]);
       } else {

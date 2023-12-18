@@ -17,10 +17,10 @@ function writeLastUsedRestaurantsId(value) {
     router.db.set("lastUsedId", lastUsedId).write();
 }
 
-function readLastUsedMenusID() {
+function readLastUsedMenusId() {
     try {
         const data = router.db.get("lastUsedId").value();
-        return data.menusId;
+        return data.menuId;
     } catch (error) {
         return 1;
     }
@@ -28,11 +28,11 @@ function readLastUsedMenusID() {
 
 function writeLastUsedMenusId(value) {
     const lastUsedId = router.db.get("lastUsedId").value();
-    lastUsedId.menusId = value;
+    lastUsedId.menuId = value;
     router.db.set("lastUsedId", lastUsedId).write();
 }
 
-function readLastUsedMenuItemsID() {
+function readLastUsedMenuItemsId() {
     try {
         const data = router.db.get("lastUsedId").value();
         return data.menuitemsId;
@@ -50,8 +50,8 @@ function writeLastUsedMenuItemsId(value) {
 module.exports = {
     readLastUsedRestaurantsId,
     writeLastUsedRestaurantsId,
-    readLastUsedMenusID,
+    readLastUsedMenusId,
     writeLastUsedMenusId,
-    readLastUsedMenuItemsID,
+    readLastUsedMenuItemsId,
     writeLastUsedMenuItemsId
 };

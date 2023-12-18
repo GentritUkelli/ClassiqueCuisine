@@ -9,12 +9,12 @@ server.use(jsonServer.bodyParser);// server ready bodyParser
 server.use(middlewares);//takes all middlewares json server has  
 
 const restaurantsRoutes = require("./routes/restaurants");
-//const menusRoutes = require("./routes/menus");
+const menusRoutes = require("./routes/menus");
 //const menuItemsRoutes = require("./routes/menu-items");
 
 //use routes handlers for json data
 restaurantsRoutes(server);
-//menusRoutes(server);
+menusRoutes(server);
 //menuItemsRoutes(server);
 
 //start json server on port 8095
