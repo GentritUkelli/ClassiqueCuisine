@@ -9,13 +9,13 @@ server.use(jsonServer.bodyParser);
 module.exports = function (server) {
   let menuIdCounter = readLastUsedMenusId();
 
-  server.post("/api/menus/:restaurant_id", (request, response) => {
+  server.post("/api/", (request, response) => {
     const restaurantId = parseInt(request.params.restaurant_id);
     const restaurantsData = router.db.get("restaurants").value();
     const restaurant = restaurantsData.find((rest) => rest.id === restaurantId);
 
     if (!restaurant) {
-      response.status(404).json({ error: "Restaurant not found" });
+      response.status(404).json({ error: "" });
     } else {
       const requestBody = request.body;
       createMenu(restaurant, requestBody, response, restaurantsData);
@@ -39,7 +39,7 @@ module.exports = function (server) {
     response.json(newMenu);
   }
 
-  server.get("/api/menus/:restaurant_id/:menu_id?", (request, response) => {
+  server.get("/api?", (request, response) => {
     const restaurantId = parseInt(request.params.restaurant_id);
     const menuId = request.params.menu_id ? parseInt(request.params.menu_id) : null;
 
@@ -47,7 +47,7 @@ module.exports = function (server) {
     const restaurant = restaurantsData.find((rest) => rest.id === restaurantId);
 
     if (!restaurant) {
-      response.status(404).json({ error: "Restaurant not found" });
+      response.status(404).json({ error: "" });
     } else {
       if (menuId) {
         const menu = restaurant.menus.find((m) => m.id === menuId);
@@ -63,14 +63,14 @@ module.exports = function (server) {
     }
   });
 
-  server.delete("/api/menus/:restaurant_id/:menu_id", (request, response) => {
+  server.delete("/api", (request, response) => {
     const restaurantId = parseInt(request.params.restaurant_id);
     const menuId = parseInt(request.params.menu_id);
     const restaurantsData = router.db.get("restaurants").value();
     const restaurant = restaurantsData.find((rest) => rest.id === restaurantId);
 
     if (!restaurant) {
-      response.status(404).json({ error: "Restaurant not found" });
+      response.status(404).json({ error: "" });
     } else {
       const menuIndex = restaurant.menus.findIndex((m) => m.id === menuId);
 
@@ -84,7 +84,7 @@ module.exports = function (server) {
     }
   });
 
-  server.put("/api/menus/:restaurant_id/:menu_id", (request, response) => {
+  server.put("/api/", (request, response) => {
     const restaurantId = parseInt(request.params.restaurant_id);
     const menuId = parseInt(request.params.menu_id);
     const requestBody = request.body;
@@ -93,7 +93,7 @@ module.exports = function (server) {
     const restaurant = restaurantsData.find((rest) => rest.id === restaurantId);
 
     if (!restaurant) {
-      response.status(404).json({ error: "Restaurant not found" });
+      response.status(404).json({ error: "" });
     } else {
       updateMenu(menuId, restaurant, requestBody, response, restaurantsData);
     }
