@@ -1,10 +1,7 @@
 module.exports = function (server) {
   const { readLastUsedRestaurantsId } = require("../utils");
-
   let restaurantIdCounter = readLastUsedRestaurantsId();
-
   const jsonServer = require("json-server");
-
   const router = jsonServer.router("db.json");
 
   server.post("/api/restaurants", (request, response) => {

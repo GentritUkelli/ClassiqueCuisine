@@ -5,57 +5,37 @@
       "name": "Savor Delights",
       "menus": [
         {
-          "id": 1,
-          "name": "Chef's Specials",
-          "menu_items": [
-            {
-              "id": 1,
-              "name": "Signature Steak",
-              "description": "Prime steak seasoned and grilled to perfection",
-              "price": 29.99
-            },
-            {
-              "id": 2,
-              "name": "Seafood Platter",
-              "description": "A selection of fresh seafood including shrimp, scallops, and mussels",
-              "price": 26.99
-            },
-            {
-              "id": 3,
-              "name": "Vegetarian Delight",
-              "description": "A medley of roasted vegetables served with quinoa",
-              "price": 18.99
-            }
-          ]
-        },
-        {
           "id": 2,
-          "name":"Pite me djath",
-          "menu_items": []
+          "name": "Pite me djath",
+          "menuItems": []
         },
         {
           "id": 3,
-          "menu_items": []
+          "menuItems": []
         },
         {
           "id": 4,
-          "menu_items": []
+          "menuItems": []
         },
         {
           "id": 5,
-          "menu_items": []
+          "menuItems": []
         },
         {
           "id": 7,
-          "menu_items": []
+          "menuItems": []
         },
         {
           "id": 8,
-          "menu_items": []
+          "menuItems": []
         },
         {
           "id": 9,
-          "menu_items": []
+          "menuItems": []
+        },
+        {
+          "id": 10,
+          "menuItems": []
         }
       ]
     },
@@ -66,7 +46,7 @@
   ],
   "lastUsedId": {
     "restaurantId": 3,
-    "menuId": 10,
-    "menuItemsId": 4
+    "menuId": 11,
+    "menuItemId": 5
   }
 }

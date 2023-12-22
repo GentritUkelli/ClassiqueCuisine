@@ -1,9 +1,10 @@
 const { request, response } = require("express");
 module.exports = function (server) {
-  const { readLastUsedMenusId } = require("../utils");
-  const jsonServer = require("json-server");
-  const router = jsonServer.router("db.json");
-  let menuIdCounter = readLastUsedMenusId();
+const { readLastUsedMenusId } = require("../utils");
+const jsonServer = require("json-server");
+const router = jsonServer.router("db.json");
+let menuIdCounter = readLastUsedMenusId();
+
 
   server.post("/api/menus/:id", (request, response) => {
     const restaurantId = parseInt(request.params.id);
@@ -16,25 +17,24 @@ module.exports = function (server) {
       response.status(404).json({ error: "Restaurant not found" });
     } else {
       const restaurant = restaurantsData[index];
-      const menuList = restaurant.menu_list;
-
+      const menuList = restaurant.menus; 
       if (requestBody.id === undefined) {
         let menuId;
         menuId = menuIdCounter++;
         const newMenu = {
           id: menuId,
           name: requestBody.name,
-          menuItems_list: [],
+          menu_items: [], 
         };
         menuList.push(newMenu);
-        restaurant.menu_list = menuList;
+        restaurant.menus = menuList; 
         router.db.set("restaurants", restaurantsData).write();
         const lastUsedId = router.db.get("lastUsedId").value();
         lastUsedId.menuId = menuIdCounter;
         router.db.set("lastUsedId", lastUsedId).write();
         response.json(restaurantsData[index]);
       } else {
-        const menusIndex = restaurant.menu_list.findIndex(
+        const menusIndex = menuList.findIndex(
           (menus) => menus.id === parseInt(requestBody.id)
         );
         if (menusIndex === -1) {
@@ -44,12 +44,12 @@ module.exports = function (server) {
         } else {
           requestBody.id = parseInt(requestBody.id);
           const updatedMenu = {
-            id: menuId,
-          name: requestBody.name,
-          menuItems_list: [],
+            id: requestBody.id,
+            name: requestBody.name,
+            menu_items: [], 
           };
-          restaurant.menu_list[menusIndex] = {
-            ...restaurant.menu_list[menusIndex],
+          menuList[menusIndex] = {
+            ...menuList[menusIndex],
             ...updatedMenu,
           };
           router.db.set("restaurants", restaurantsData).write();
@@ -66,7 +66,7 @@ module.exports = function (server) {
     if (!restaurant) {
       response.status(404).json({ error: "Restaurant not found" });
     } else {
-      const menuList = restaurant.menu_list;
+      const menuList = restaurant.menus;
       response.json(menuList);
     }
   });
@@ -79,9 +79,7 @@ module.exports = function (server) {
     if (!restaurant) {
       response.status(404).json({ error: "Restaurant not found" });
     } else {
-      const menu = restaurant.menu_list.find(
-        (men) => men.id === menuId
-      );
+      const menu = restaurant.menus.find((men) => men.id === menuId);
       if (!menu) {
         response
           .status(404)
@@ -96,22 +94,23 @@ module.exports = function (server) {
     const menuId = parseInt(request.params.id);
     const restaurantsData = router.db.get("restaurants").value();
     let menuDeleted = false;
-    restaurantsData.forEach((restaurant) => {
-      const menuIndex = restaurant.menu_list.findIndex(
-        (menu) => menu.id === menuId
-      );
-      if (menuIndex !== -1) {
-        restaurant.menu_list.splice(menuIndex, 1);
-        menuDeleted = true;
+    for (const restaurant of restaurantsData) {
+      const menu = restaurant.menus.find((menu) => menu.id === menuId);
+      if (menu) {
+          // Remove the menu from the restaurant's menu_list
+          const menuIndex = restaurant.menus.indexOf(menu);
+          restaurant.menus.splice(menuIndex, 1);
+          menuDeleted = true;
+          break; // Exit the loop once the menu is found and deleted
       }
-    });
-    if (menuDeleted) {
-      router.db.set("restaurant", restaurantsData).write();
-      response.json({ message: "Menu deleted successfully." });
-    } else {
-      response
-        .status(404)
-        .json({ error: "Menu not found in any restaurant" });
-    }
-  });
+  }
+
+  if (menuDeleted) {
+      // Save the updated data
+      router.db.set("restaurants", restaurantsData).write();
+      response.json({ message: "Menu deleted successfully" });
+  } else {
+      response.status(404).json({ error: "Menu not found in any restaurant" });
+  }
+});
 };

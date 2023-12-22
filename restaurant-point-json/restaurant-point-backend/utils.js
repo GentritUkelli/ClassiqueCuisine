@@ -35,7 +35,7 @@ function writeLastUsedMenusId(value) {
 function readLastUsedMenuItemsId() {
     try {
         const data = router.db.get("lastUsedId").value();
-        return data.menuitemsId;
+        return data.menuItemsId;
     } catch (error) {
         return 1;
     }
@@ -43,7 +43,7 @@ function readLastUsedMenuItemsId() {
 
 function writeLastUsedMenuItemsId(value) {
     const lastUsedId = router.db.get("lastUsedId").value();
-    lastUsedId.menuitemsId = value;
+    lastUsedId.menuItemsId = value;
     router.db.set("lastUsedId", lastUsedId).write();
 }
 
